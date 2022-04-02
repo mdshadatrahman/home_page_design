@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import 'widgets/my_attendence.dart';
+import 'widgets/notice_board.dart';
 import 'widgets/search_bar_widget.dart';
 import 'widgets/sms_service.dart';
 import 'widgets/todays_schedule.dart';
 import 'widgets/top_bar_with_icons.dart';
+import 'widgets/tutors.dart';
 import 'widgets/your_class_widget.dart';
 import 'widgets/your_dashboard.dart';
 
@@ -82,41 +85,23 @@ class HomePage extends StatelessWidget {
 
                     SizedBox(height: deviceHeight * .02),
                     //My Attendence
-                    Container(
-                      height: deviceHeight * 0.25,
-                      width: deviceWidth * 0.9,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(height: deviceHeight * .01),
-                          Text(
-                            'My Attendence',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: deviceHeight * .01),
-                          CircularPercentIndicator(
-                            radius: 50.0,
-                            lineWidth: 5.0,
-                            percent: .78,
-                            center: new Text(
-                              "78%",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            progressColor: Color(0xff7AC6FA),
-                            backgroundColor: Color.fromARGB(255, 3, 119, 214),
-                          )
-                        ],
-                      ),
+                    MyAttendence(
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                    ),
+                    SizedBox(height: deviceHeight * .02),
+
+                    //Notice Board
+                    NoticeBoard(
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                    ),
+
+                    SizedBox(height: deviceHeight * .02),
+                    //Tutors
+                    Tutors(
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
                     ),
 
                     SizedBox(height: deviceHeight * .02),

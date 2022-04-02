@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/your_dashboard.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -101,166 +103,11 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: deviceHeight * .08),
-                    Container(
-                      height: deviceHeight * 0.3,
-                      width: deviceWidth * 0.8,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0.0, 1.0), //(x,y)
-                            blurRadius: 6.0,
-                          ),
-                        ],
-                      ),
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Your Dashboard',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: deviceHeight * 0.02,
-                              ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: deviceHeight * 0.2,
-                                          width: deviceWidth * .3,
-                                          decoration: BoxDecoration(
-                                            color: Colors.blue[100],
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 20,
-                                          left: 4.5,
-                                          child: Column(
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundColor: Colors.grey,
-                                              ),
-                                              Text(
-                                                '500',
-                                                style: TextStyle(
-                                                  fontSize: 30,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                'Total Students',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(width: deviceWidth * .02),
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: deviceHeight * 0.2,
-                                          width: deviceWidth * .3,
-                                          decoration: BoxDecoration(
-                                            color: Colors.red[200],
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 20,
-                                          left: 4.5,
-                                          child: Column(
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundColor: Colors.grey,
-                                              ),
-                                              Text(
-                                                '500',
-                                                style: TextStyle(
-                                                  fontSize: 30,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                'Total Students',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(width: deviceWidth * .02),
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: deviceHeight * 0.2,
-                                          width: deviceWidth * .3,
-                                          decoration: BoxDecoration(
-                                            color: Color.fromARGB(
-                                                255, 237, 132, 255),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 20,
-                                          left: 4.5,
-                                          child: Column(
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundColor: Colors.grey,
-                                              ),
-                                              Text(
-                                                '500',
-                                                style: TextStyle(
-                                                  fontSize: 30,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                'Total Students',
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(width: deviceWidth * .02),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    YourDashboardWidget(
+                        deviceHeight: deviceHeight, deviceWidth: deviceWidth),
+                    SizedBox(height: deviceHeight * .02),
+                    SMSService(
+                        deviceHeight: deviceHeight, deviceWidth: deviceWidth)
                   ],
                 ),
               ),
@@ -268,6 +115,97 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class SMSService extends StatelessWidget {
+  const SMSService({
+    Key? key,
+    required this.deviceHeight,
+    required this.deviceWidth,
+  }) : super(key: key);
+
+  final double deviceHeight;
+  final double deviceWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.topLeft,
+          padding: EdgeInsets.only(left: 30, bottom: 5),
+          child: Text(
+            'SmS Service',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          height: deviceHeight * 0.20,
+          width: deviceWidth * 0.8,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.blue,
+                Colors.purple,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(10),
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.grey,
+            //     offset: Offset(0.0, 1.0), //(x,y)
+            //     blurRadius: 6.0,
+            //   ),
+            // ],
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: deviceHeight * .01),
+              Text(
+                'Any information you \nneed to inform',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: deviceHeight * .01),
+              Text(
+                'You have unlimited sms service',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: deviceHeight * .01),
+              Container(
+                width: deviceWidth * 0.6,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Send SMS',
+                    style: TextStyle(
+                      color: Colors.blue,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

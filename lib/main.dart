@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import 'widgets/search_bar_widget.dart';
+import 'widgets/sms_service.dart';
+import 'widgets/todays_schedule.dart';
+import 'widgets/top_bar_with_icons.dart';
+import 'widgets/your_class_widget.dart';
 import 'widgets/your_dashboard.dart';
 
 void main() {
@@ -26,6 +32,7 @@ class HomePage extends StatelessWidget {
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 235, 235, 235),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -45,69 +52,74 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.sort,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.radio_button_unchecked,
-                              size: 30,
-                              color: Colors.white,
-                            ),
-                            Icon(
-                              Icons.notifications,
-                              size: 30,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                    TopBarWithIcons(),
                     SizedBox(height: deviceHeight * .04),
-                    Container(
-                      height: deviceHeight * 0.06,
-                      width: deviceWidth * 0.8,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 5),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText:
-                                      'Search for Classes, Tutors, Notice',
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  border: InputBorder.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.blue,
-                            ),
-                          ),
-                        ],
-                      ),
+                    SearchBarWidget(
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
                     ),
                     SizedBox(height: deviceHeight * .08),
                     YourDashboardWidget(
-                        deviceHeight: deviceHeight, deviceWidth: deviceWidth),
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                    ),
                     SizedBox(height: deviceHeight * .02),
                     SMSService(
-                        deviceHeight: deviceHeight, deviceWidth: deviceWidth)
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                    ),
+                    SizedBox(height: deviceHeight * .02),
+                    YourClassWidget(
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                    ),
+                    SizedBox(height: deviceHeight * .02),
+                    //Today's Schedule Start
+                    TodaysSchedule(
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                    ),
+
+                    SizedBox(height: deviceHeight * .02),
+                    //My Attendence
+                    Container(
+                      height: deviceHeight * 0.25,
+                      width: deviceWidth * 0.9,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(height: deviceHeight * .01),
+                          Text(
+                            'My Attendence',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: deviceHeight * .01),
+                          CircularPercentIndicator(
+                            radius: 50.0,
+                            lineWidth: 5.0,
+                            percent: .78,
+                            center: new Text(
+                              "78%",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            progressColor: Color(0xff7AC6FA),
+                            backgroundColor: Color.fromARGB(255, 3, 119, 214),
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: deviceHeight * .02),
                   ],
                 ),
               ),
@@ -115,97 +127,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class SMSService extends StatelessWidget {
-  const SMSService({
-    Key? key,
-    required this.deviceHeight,
-    required this.deviceWidth,
-  }) : super(key: key);
-
-  final double deviceHeight;
-  final double deviceWidth;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          alignment: Alignment.topLeft,
-          padding: EdgeInsets.only(left: 30, bottom: 5),
-          child: Text(
-            'SmS Service',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Container(
-          height: deviceHeight * 0.20,
-          width: deviceWidth * 0.8,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.blue,
-                Colors.purple,
-              ],
-            ),
-            borderRadius: BorderRadius.circular(10),
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: Colors.grey,
-            //     offset: Offset(0.0, 1.0), //(x,y)
-            //     blurRadius: 6.0,
-            //   ),
-            // ],
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: deviceHeight * .01),
-              Text(
-                'Any information you \nneed to inform',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: deviceHeight * .01),
-              Text(
-                'You have unlimited sms service',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(height: deviceHeight * .01),
-              Container(
-                width: deviceWidth * 0.6,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Send SMS',
-                    style: TextStyle(
-                      color: Colors.blue,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
